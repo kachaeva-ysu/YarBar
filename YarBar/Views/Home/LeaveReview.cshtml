@@ -1,0 +1,31 @@
+﻿@model YarBar.Models.Review
+
+<h2 class="display-6" style="margin-bottom: 3rem">Оставьте отзыв</h2>
+
+<h4 class="card-title">@ViewBag.Place.Name</h4>
+<br/>
+
+<form asp-action="LeaveReview" method="post">
+     <input type="hidden" asp-for="PlaceId" value="@ViewBag.Place.Id" />
+<label class="card-title" style="margin-right:2rem">Оценка: </label>
+<select asp-for="Score">
+    <option>5</option>
+    <option>4</option>
+    <option>3</option>
+    <option>2</option>
+    <option>1</option>
+</select>
+<br />
+<label class="card-title" style="margin-right:2rem">Комментарий: </label>
+<textarea asp-for="Comment" style="width:24rem; min-height:6rem" ></textarea>
+<br/>
+<br/>
+<input type="submit" value="Подтвердить" class="btn btn-info" />
+</form>
+
+<div class="row" align="center">
+    <a asp-action="Details" asp-controller="Home" asp-route-id="@ViewBag.Place.Id" class="btn btn-outline-secondary" style="max-width:10rem; margin-top:3rem">Назад</a>
+</div>
+
+
+

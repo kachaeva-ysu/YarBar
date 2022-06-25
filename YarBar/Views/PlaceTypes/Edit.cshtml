@@ -1,0 +1,24 @@
+﻿@model YarBar.Models.PlaceType
+
+<h2 class="display-6" style="margin-bottom: 3rem">Редактировать тип заведения</h2>
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id" />
+            <div class="form-group">
+                <label asp-for="Name" class="control-label" style="margin-bottom:0.5rem"></label>
+                <input asp-for="Name" class="form-control" style="margin-bottom:1rem"/>
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Сохранить" class="btn btn-info" style="margin-top:1rem" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div class="row" align="center">
+    <a asp-action="Index" class="btn btn-outline-secondary" style="max-width:10rem; margin-top:3rem">Назад</a>
+</div>
+

@@ -1,0 +1,36 @@
+﻿@model IEnumerable<YarBar.Models.PlaceType>
+
+<h2 class="display-6" style="margin-bottom: 2rem">Управление типами заведений</h2>
+
+<p>
+    <a asp-action="Create" class="btn btn-outline-info">
+        <img src="@Url.Content("~/images/add.png")" style="height:1.5rem; width:1.5rem">
+    </a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr style="height:4rem">
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td style="position:absolute; right:3rem; height:4rem">
+                <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-outline-info" >
+                    <img src="@Url.Content("~/images/edit.png")" style="height:1.5rem; width:1.5rem">
+                </a>
+                <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-outline-info">
+                    <img src="@Url.Content("~/images/delete.png")" style="height:1.5rem; width:1.5rem">
+                </a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

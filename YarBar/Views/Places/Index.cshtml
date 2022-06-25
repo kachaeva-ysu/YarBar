@@ -1,0 +1,48 @@
+﻿@model IEnumerable<YarBar.Models.Place>
+
+<h2 class="display-6" style="margin-bottom: 2rem">Управление заведениями</h2>
+
+<p>
+    <a asp-action="Create" class="btn btn-outline-info">
+        <img src="@Url.Content("~/images/add.png")" style="height:1.5rem; width:1.5rem">
+    </a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Description)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PlaceType)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PlaceType.Name)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-outline-info" style="margin-bottom:1rem">
+                    <img src="@Url.Content("~/images/edit.png")" style="height:1.5rem; width:1.5rem">
+                </a>
+                <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-outline-info">
+                    <img src="@Url.Content("~/images/delete.png")" style="height:1.5rem; width:1.5rem">
+                </a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
