@@ -1,0 +1,113 @@
+﻿@using Microsoft.AspNetCore.Identity
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
+
+@{
+    if (SignInManager.IsSignedIn(User))
+    {
+        var userName = UserManager.GetUserName(User);
+        var user = await UserManager.FindByNameAsync(userName);
+
+        if (user != null && await UserManager.IsInRoleAsync(user, "admin"))
+        {
+            <ul class="navbar-nav navbar-right">
+                <li class="nav-item dropdown">
+                    <div class="dropdown">
+                        <button class="btn btn-info dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                            @UserManager.GetUserName(User)
+                        </button>
+                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                            <li>
+                                <a asp-controller="Admin" asp-action="Index" class="dropdown-item">
+                                    Пользователи
+                                </a>
+                            </li>    
+                            <li>
+                                <a asp-controller="Admin" asp-action="GetRoles" class="dropdown-item">
+                                    Роли
+                                </a>
+                            </li>
+                            <li>
+                                <a asp-controller="Account" asp-action="ChangePassword" asp-route-name="@UserManager.GetUserName(User)" class="dropdown-item">
+                                    Смена пароля
+                                </a>
+                            </li>
+                            <li>
+                                <form asp-area="" asp-controller="Account" asp-action="Logout">
+                                    <button type="submit" class="dropdown-item"> Выход </button>
+                                </form>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+            </ul>
+        }
+
+        else if (user != null && await UserManager.IsInRoleAsync(user, "manager"))
+        {
+            <ul class="navbar-nav navbar-right">
+                <li class="nav-item dropdown">
+                    <div class="dropdown">
+                        <button class="btn btn-info dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                            @UserManager.GetUserName(User)
+                        </button>
+                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                            <li>
+                                <a asp-controller="Places" asp-action="Index" class="dropdown-item">
+                                    Заведения
+                                </a>
+                            </li>    
+                            <li>
+                                <a asp-controller="PlaceTypes" asp-action="Index" class="dropdown-item">
+                                    Типы заведений
+                                </a>
+                            </li>
+                            <li>
+                                <a asp-controller="Account" asp-action="ChangePassword" asp-route-name="@UserManager.GetUserName(User)" class="dropdown-item">
+                                    Смена пароля
+                                </a>
+                            </li>
+                            <li>
+                                <form asp-area="" asp-controller="Account" asp-action="Logout">
+                                    <button type="submit" class="dropdown-item"> Выход </button>
+                                </form>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+            </ul>
+        }
+
+        else
+        {
+            <ul class="navbar-nav navbar-right">
+                <li class="nav-item dropdown">
+                    <div class="dropdown">
+                        <button class="btn btn-info dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                            @UserManager.GetUserName(User)
+                        </button>
+                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                            <li>
+                                <a asp-controller="Account" asp-action="ChangePassword" asp-route-name="@UserManager.GetUserName(User)" class="dropdown-item">
+                                    Смена пароля
+                                </a>
+                            </li>
+                            <li>
+                                <form asp-area="" asp-controller="Account" asp-action="Logout">
+                                    <button type="submit" class="dropdown-item"> Выход </button>
+                                </form>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+            </ul>
+        }
+    }
+    else
+    {
+        <ul class="navbar-nav navbar-right">
+            <li><a asp-controller="Account" asp-action="Register" class="btn btn-info"> Регистрация </a></li>
+            <li><a asp-controller="Account" asp-action="Login" class="btn btn-info"> Вход </a></li>
+        </ul>
+    }
+}

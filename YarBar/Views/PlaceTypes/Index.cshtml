@@ -1,6 +1,6 @@
 ﻿@model IEnumerable<YarBar.Models.PlaceType>
 
-<h2 class="display-6" style="margin-bottom: 2rem">Управление типами заведений</h2>
+<h2 class="display-6" style="margin-bottom: 2rem">Типы заведений</h2>
 
 <p>
     <a asp-action="Create" class="btn btn-outline-info">
@@ -26,7 +26,7 @@
                 <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-outline-info" >
                     <img src="@Url.Content("~/images/edit.png")" style="height:1.5rem; width:1.5rem">
                 </a>
-                <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-outline-info">
+                <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-outline-danger">
                     <img src="@Url.Content("~/images/delete.png")" style="height:1.5rem; width:1.5rem">
                 </a>
             </td>

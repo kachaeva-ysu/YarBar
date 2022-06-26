@@ -1,0 +1,39 @@
+﻿@using Microsoft.AspNetCore.Identity;
+
+@model IEnumerable<YarBar.Models.ViewModels.UserWithRoles>
+
+<h2 class="display-6" style="margin-bottom: 2rem">Пользователи</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Email</th>
+            <th>Роли</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+    @foreach (var item in Model) {
+        <tr style="height:4rem">
+            <td>
+                @Html.DisplayFor(modelItem => item.User.Email)
+            </td>
+            <td>
+                @foreach(var role in item.Roles)
+                {
+                     <span>@role </span>   
+                }
+            </td>
+            <td style="position:absolute; right:3rem; height:4rem">
+                <a asp-action="EditUserRoles" asp-route-id="@item.User.Id" class="btn btn-outline-info" >
+                    <img src="@Url.Content("~/images/edit.png")" style="height:1.5rem; width:1.5rem">
+                </a>
+                <a asp-action="DeleteUser" asp-route-id="@item.User.Id" class="btn btn-outline-danger">
+                    <img src="@Url.Content("~/images/delete.png")" style="height:1.5rem; width:1.5rem">
+                </a>
+            </td>
+        </tr>
+    }
+    </tbody>
+</table>
+

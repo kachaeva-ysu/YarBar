@@ -60,7 +60,7 @@ namespace YarBar.Controllers
         {
             review.UserId = 1;
             _context.Reviews.Add(review);
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
             return RedirectToAction("Details", new { id = review.PlaceId });
         }
 
@@ -73,10 +73,10 @@ namespace YarBar.Controllers
                 var matches = rg.Matches(searchString.ToLower());
                 foreach (var word in matches)
                 {
-                    var list = _context.Places.Include(p => p.PlaceType).Include(p => p.Reviews)
+                    var list = await _context.Places.Include(p => p.PlaceType).Include(p => p.Reviews)
                                               .Where(p => p.Name.Contains(word.ToString()) ||
                                                     p.Description.Contains(word.ToString()) ||
-                                                    p.PlaceType.Name.Contains(word.ToString())).ToList();
+                                                    p.PlaceType.Name.Contains(word.ToString())).ToListAsync();
                     results.AddRange(list);
                 }
                 results = (from item in results select item).Distinct().ToList();

@@ -1,0 +1,23 @@
+﻿@model YarBar.Models.ViewModels.RegisterViewModel
+
+<h2 class="display-6" style="margin-bottom: 3rem">Регистрация</h2>
+
+<form method="post" asp-controller="Account" asp-action="Register" class="col-md-8 col-md-offset-2">
+    <div asp-validation-summary="ModelOnly"></div>
+    <div class="mb-3">
+        <label asp-for="Email"></label><br />
+        <input asp-for="Email" class="form-control"/>
+        <span asp-validation-for="Email" class="text-danger"></span>
+    </div>
+    <div class="mb-3">
+        <label asp-for="Password"></label><br />
+        <input asp-for="Password" class="form-control"/>
+        <span asp-validation-for="Password" class="text-danger"></span>
+    </div>
+    <div class="mb-3">
+        <label asp-for="PasswordConfirm"></label><br />
+        <input asp-for="PasswordConfirm" class="form-control"/>
+        <span asp-validation-for="PasswordConfirm" class="text-danger"></span>
+    </div>
+    <button type="submit" class="btn btn-info" style="margin-top:2rem">Зарегистрироваться</button>
+</form>

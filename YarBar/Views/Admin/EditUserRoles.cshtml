@@ -1,0 +1,35 @@
+﻿@using Microsoft.AspNetCore.Identity
+@model YarBar.Models.ViewModels.ChangeRoleViewModel
+
+<h2 class="display-6" style="margin-bottom: 3rem">Изменение ролей для пользователя @Model.Email</h2>
+
+<form asp-action="EditUserRoles" asp-controller="Admin" method="post">
+    <input type="hidden" name="id" value="@Model.Id"/>
+    <div class="form-group">
+        @foreach (IdentityRole role in Model.AllRoles)
+        {
+            @if (Model.UserRoles.Contains(role.Name))
+            {
+                <input type="checkbox" name="roles"
+                       value="@role.Name" checked />
+                @role.Name
+            }
+            else
+            {
+                <input type="checkbox" name="roles"
+                       value="@role.Name" />
+                @role.Name
+            }
+            <br />
+            <br/>
+        }
+
+    </div>
+    <div class="form-group">
+        <input type="submit" value="Сохранить" class="btn btn-info" style="margin-top:1rem"/>
+    </div>
+    <div class="row" align="center">
+        <a asp-action="Index" class="btn btn-outline-secondary" style="max-width:10rem; margin-top:3rem">Назад</a>
+    </div>
+
+</form>
