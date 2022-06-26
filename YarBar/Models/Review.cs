@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.AspNetCore.Identity;
 
 namespace YarBar.Models
 {
@@ -20,6 +21,11 @@ namespace YarBar.Models
         public int PlaceId { get; set; }
 
         [HiddenInput(DisplayValue = false)]
-        public int UserId { get; set; }
+        [ForeignKey("AspNetUsers")]
+        public string UserId { get; set; }
+
+        public IdentityUser User { get; set; }
+        [Display(Name = "Заведение")]
+        public Place Place { get; set; }
     }
 }

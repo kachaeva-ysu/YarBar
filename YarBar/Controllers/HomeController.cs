@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using System.Text.RegularExpressions;
@@ -9,10 +11,12 @@ namespace YarBar.Controllers
     public class HomeController : Controller
     {
         private readonly ApplicationContext _context;
+        private UserManager<IdentityUser> _userManager;
 
-        public HomeController(ApplicationContext context)
+        public HomeController(ApplicationContext context, UserManager<IdentityUser> userManager)
         {
             _context = context;
+            _userManager = userManager;
         }
 
         public async Task<IActionResult> Index(int typeId = 0)
@@ -39,6 +43,7 @@ namespace YarBar.Controllers
             return View(place);
         }
 
+        [Authorize]
         public async Task<IActionResult> LeaveReview(int? id)
         {
             if (id == null)
@@ -58,7 +63,9 @@ namespace YarBar.Controllers
         [HttpPost]
         public async Task<IActionResult> LeaveReview([Bind("PlaceId,Score,Comment")] Review review)
         {
-            review.UserId = 1;
+            var name = HttpContext.User.Identity.Name;
+            var user = await _userManager.FindByNameAsync(name);
+            review.UserId = user.Id;
             _context.Reviews.Add(review);
             await _context.SaveChangesAsync();
             return RedirectToAction("Details", new { id = review.PlaceId });

@@ -114,6 +114,13 @@ namespace YarBar.Controllers
             var role = await _roleManager.FindByIdAsync(id);
             if (role == null)
                 return NotFound();
+            var users = await _userManager.GetUsersInRoleAsync(role.Name);
+            if (users.Count > 0) 
+            {
+                ViewBag.RoleName = role.Name;
+                var list = users.Select(u => u.Email).ToList();
+                return View("DeleteError", list);
+            }
             return View(role);
         }
 

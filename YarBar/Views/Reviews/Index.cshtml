@@ -1,0 +1,40 @@
+﻿@model IEnumerable<YarBar.Models.Review>
+
+<h2 class="display-6" style="margin-bottom: 2rem">Мои отзывы</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Place)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Score)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Comment)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Place.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Score)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Comment)
+            </td>
+            <td>
+                <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-outline-danger">
+                    <img src="@Url.Content("~/images/delete.png")" style="height:1.5rem; width:1.5rem">
+                </a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

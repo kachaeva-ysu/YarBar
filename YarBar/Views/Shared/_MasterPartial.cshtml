@@ -28,6 +28,11 @@
                                 </a>
                             </li>
                             <li>
+                                <a asp-controller="Reviews" asp-action="Index" class="dropdown-item">
+                                    Мои отзывы
+                                </a>
+                            </li>
+                            <li>
                                 <a asp-controller="Account" asp-action="ChangePassword" asp-route-name="@UserManager.GetUserName(User)" class="dropdown-item">
                                     Смена пароля
                                 </a>
@@ -63,6 +68,11 @@
                                 </a>
                             </li>
                             <li>
+                                <a asp-controller="Reviews" asp-action="Index" class="dropdown-item">
+                                    Мои отзывы
+                                </a>
+                            </li>
+                            <li>
                                 <a asp-controller="Account" asp-action="ChangePassword" asp-route-name="@UserManager.GetUserName(User)" class="dropdown-item">
                                     Смена пароля
                                 </a>
@@ -87,6 +97,11 @@
                             @UserManager.GetUserName(User)
                         </button>
                         <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                            <li>
+                                <a asp-controller="Reviews" asp-action="Index" class="dropdown-item">
+                                    Мои отзывы
+                                </a>
+                            </li>
                             <li>
                                 <a asp-controller="Account" asp-action="ChangePassword" asp-route-name="@UserManager.GetUserName(User)" class="dropdown-item">
                                     Смена пароля

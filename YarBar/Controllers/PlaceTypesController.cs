@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -9,6 +10,7 @@ using YarBar.Models;
 
 namespace YarBar.Controllers
 {
+    [Authorize(Roles = "manager")]
     public class PlaceTypesController : Controller
     {
         private readonly ApplicationContext _context;
@@ -130,6 +132,13 @@ namespace YarBar.Controllers
             if (placeType == null)
             {
                 return NotFound();
+            }
+
+            var places = _context.Places.Where(p => p.PlaceTypeId == id).Select(p => p.Name).ToList();
+            if (places.Count()>0)
+            {
+                ViewBag.TypeName = placeType.Name;
+                return View("DeleteError", places);
             }
 
             return View(placeType);

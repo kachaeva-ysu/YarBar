@@ -1,0 +1,17 @@
+﻿@model List<string>
+
+<h2 class="display-6" style="margin-bottom: 3rem; margin-top:2rem">
+    Нельзя удалить тип @ViewBag.TypeName, потому что он используется в следующих заведениях:
+</h2>
+
+<ul style="font-size:large">
+    @foreach(var place in Model)
+    {
+        <li>@place</li>
+    }
+</ul>
+
+<div class="row" align="center">
+        <a asp-action="Index" class="btn btn-outline-secondary" style="max-width:10rem; margin-top:3rem">Назад</a>
+</div>
+
